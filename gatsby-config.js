@@ -1,3 +1,8 @@
+
+require('dotenv').config({
+  path: `.env.${process.env.NODE_ENV}`
+});
+
 module.exports = {
   siteMetadata: {
     title: 'Gatsby Starter Blog',
@@ -18,6 +23,16 @@ module.exports = {
       resolve: `gatsby-transformer-remark`,
       options: {
         plugins: [
+          {
+            resolve: 'gatsby-remark-github',
+            options: {
+              marker: 'GITHUB-EMBED',
+              token: process.env.GITHUB_TOKEN,
+              insertEllipsisComments: true,
+              ellipsisPhrase: '...',
+              useCache: true,
+            }
+          },
           {
             resolve: `gatsby-remark-images`,
             options: {
